@@ -1,2 +1,2 @@
-# see_how_pkg
+# SEE HOW PACKAGE
 ROS Package Development using Computer Vision
