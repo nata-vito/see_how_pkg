@@ -1,6 +1,7 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 import os
 import sys
+import time
 import rospy
 import cv2 as cv
 from sensor_msgs.msg import Image
@@ -31,6 +32,7 @@ class image_converter:
             path = r'/home/rota2030/Documents/ws_see_how/src/see_how_pkg/src/scripts/img'
             os.chdir(path)
             cv.imwrite('imgTest.jpg', self.img)
+            time.sleep(0.050)
             #cv.imshow("Image Window", self.img)      
             #cv.waitKey(3)
             
