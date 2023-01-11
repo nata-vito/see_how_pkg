@@ -1,11 +1,11 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 import os
 import sys
+import time
 import rospy
 import cv2 as cv
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge, CvBridgeError
-import tes as test
 
 class image_converter:
     def __init__(self):
@@ -29,13 +29,14 @@ class image_converter:
         if self.img is None:
             print("Could not read the image.")
         else:  
-            """ path = r'/home/rota2030/Documents/ws_see_how/src/see_how_pkg/src/scripts/image'
+            path = r'/home/rota2030/Documents/ws_see_how/src/see_how_pkg/src/scripts/img'
             os.chdir(path)
             cv.imwrite('imgTest.jpg', self.img)
-            cv.imshow("Image Window", self.img)      
-            cv.waitKey(3)"""
+            time.sleep(0.050)
+            #cv.imshow("Image Window", self.img)      
+            #cv.waitKey(3)
             
-            test.leftHand(self.img)
+            #test.leftHand(self.img)
             return self.img
        
         
