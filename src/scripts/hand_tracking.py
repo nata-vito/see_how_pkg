@@ -7,7 +7,7 @@ import mediapipe as mp
 
 class handDetector():
     # Parameters
-    def __init__(self, mode=False, maxHands=1, modelComplexity=1, detectionCon=0.5, trackCon=0.5, op = ''):
+    def __init__(self, mode=True, maxHands=1, modelComplexity=1, detectionCon=0.5, trackCon=0.5, op = ''):
         # To video streal False, any image true
         self.mode               = mode     
 

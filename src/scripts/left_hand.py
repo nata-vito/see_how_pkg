@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import os
 import rospy
 import cv2 as cv
 import numpy as np
@@ -7,13 +8,14 @@ import hand_tracking as ht
 
 class LeftHand:
     def __init__(self, frame = None):
-        self.frame      = np.asarray(frame)
+        self.frame      = frame
         self.isImg      = False
         self.i          = 0
         self.tracking   = ht.handDetector(detectionCon=0.75, maxHands=1, op='Left')
         #print(type(self.frame))
 
     def HandCapture(self):
+        pid = os.pid
 
         # Verify camera errors
         #if(type(self.frame) == np.ndarray):
@@ -26,7 +28,7 @@ class LeftHand:
         #while(self.isImg):
 
         # Flip frame to correct predict
-        self.frame = cv.flip(self.frame,1)
+        
         
         
 
