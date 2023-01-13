@@ -1,86 +1,91 @@
 #!/usr/bin/env python3
 import rospy
 import cv2 as cv
+import numpy as np
 import pub_see_how as Pub
 import hand_tracking as ht
 
-def videoCapture():
-    # Camera capture
-    cap         = cv.VideoCapture(0)
-    i           = 0
-    tracking    = ht.handDetector(detectionCon=0.75, maxHands=1, op='Left')
-    # Hand landmarks 
-    #ids         = [4, 8, 12, 16, 20]
+class LeftHand:
+    def __init__(self, frame = None):
+        self.frame      = np.asarray(frame)
+        self.isImg      = False
+        self.i          = 0
+        self.tracking   = ht.handDetector(detectionCon=0.75, maxHands=1, op='Left')
+        #print(type(self.frame))
 
-    # Verify camera errors
-    if(cap.isOpened() == False):
-        print("Error openning the video")
+    def HandCapture(self):
 
-    while(cap.isOpened() and not rospy.is_shutdown()):
-        
-        success, frame  = cap.read()
+        # Verify camera errors
+        #if(type(self.frame) == np.ndarray):
+        #    self.isImg = True
+        #else:
+         #   print("Error openning the image")
+          #  self.isImg = False
+            
+
+        #while(self.isImg):
 
         # Flip frame to correct predict
-        frame = cv.flip(frame,1)
+        self.frame = cv.flip(self.frame,1)
+        
+        
 
         # Hand's contour
-        contour         = tracking.findHands(frame, op='Left') # OP select the hand to detect
-        i              += 1 
+        #contour         = self.tracking.findHands(self.frame, op='Left') # OP select the hand to detect
+        """
+        self.i         += 1 
 
-        level = tracking.levelOutput(frame)
+        level = self.tracking.levelOutput(self.frame)
+        
+        print('Frame Flip - ok')
         
         if level:
             print(str(level) + "%")
             
-        num = tracking.labelText()            
+        num = self.tracking.labelText()            
         #print(num + "%")
         
-        if success:
+        if self.isImg:
             font     = cv.FONT_HERSHEY_COMPLEX
             left     = (50,50)
             leftSt   = (50, 80)
             right    = (380, 50)
             rightSt  = (380, 80)
-            level    = str(tracking.levelOutput(frame)) + '%'
-
-            if tracking.countFingers > -1:
-                if tracking.label == 'Left':
+            level    = str(self.tracking.levelOutput(self.frame)) + '%'
+            
+            if self.tracking.countFingers > -1:
+                print('Count Fingers - ok')
+                if self.tracking.label == 'Left':
                     
                     # Pub Here
-                    pub = Pub.Publisher(tracking.handFingers, tracking.side, 
-                                        tracking.countFingers, tracking.op)
-                    pub.talker()
+                     pub = Pub.Publisher(self.tracking.handFingers, self.tracking.side, 
+                                        self.tracking.countFingers, self.tracking.op)
+                    pub.talker() 
                     
-                    """ print(tracking.mpHands)
-                    print(tracking.hands)
+                   
+                    #cv.putText(self.frame, num, left, font, 1, (255,0,0), 2)
+                    #cv.putText(self.frame, level, leftSt, font, 1, (255,0,0), 2)
                     
-                    print("ok") """
-                    
-                    cv.putText(frame, num, left, font, 1, (255,0,0), 2)
-                    cv.putText(frame, level, leftSt, font, 1, (255,0,0), 2)
-                else:
-                     cv.putText(frame, num, right, font, 1, (255,0,0), 2)
-                     cv.putText(frame, level, rightSt, font, 1, (255,0,0), 2)
+             #   else:
+                    #cv.putText(self.frame, num, right, font, 1, (255,0,0), 2)
+                    #cv.putText(self.frame, level, rightSt, font, 1, (255,0,0), 2)
 
-            cv.imshow('Frame', frame)
-            key = cv.waitKey(1)
+            #cv.imshow('Frame', self.frame)
+            #cv.waitKey(3)
 
             # Exit by user hand
-            """ if tracking.handFingers == "01100":
-                break  """
+            if tracking.handFingers == "01100":
+                break  
 
             # Exit by user using keyboard
-            if key == ord('q'):
-                break
-        else:
-            break
+           # if key == ord('q'):
+            #    break
+            
+            self.isImg = False
+            #else:
+             #   break
 
-    cap.release()
-    cv.destroyAllWindows()
+        #cv.destroyAllWindows()
+        """
 
 
-if __name__ == '__main__':
-    try:
-        videoCapture()
-    except rospy.ROSInterruptException:
-            pass
