@@ -1,11 +1,8 @@
 #!/usr/bin/env python3
 import sys
-import math 
 import rospy
 import cv2 as cv
 import ros_numpy
-import numpy as np
-#import mediapipe as mp
 import left_hand as lfHand
 from sensor_msgs.msg import Image
 
@@ -14,11 +11,11 @@ class image_converter:
         # Topic to read the image msg data
         self.image_sub = rospy.Subscriber("camera", Image, self.image_callback)
         self.img = None
+        self.lf = lfHand.LeftHand()
 
     def image_callback(self, msg):
         self.img = ros_numpy.numpify(msg)
-        lf = lfHand.LeftHand(self.img)
-        lf.HandCapture()
+        self.lf.HandCapture(self.img)
         #print(self.img)
     
     def showImage(self):
@@ -26,15 +23,13 @@ class image_converter:
             print("Could not read the image.")
         else:  
             cv.imshow("Image Window", self.img)      
-            cv.waitKey(3)
-    
-    
-    
+            cv.waitKey(3)   
         
         
 def main(args):
     ic = image_converter()
     rospy.init_node('image_converter', anonymous=True)
+    
 
     
 if __name__ == "__main__":

@@ -4,7 +4,7 @@ from std_msgs.msg import Header
 from see_how_pkg.msg import Hand
 
 class Publisher:
-    def __init__(self, fingers = None, side = None, countFingers = None, nodeName = None):
+    def __init__(self, fingers = 00000, side = 'None', countFingers = 0 , nodeName = 'Hand'):
         
         rospy.init_node('left_hand', anonymous=True)
         self.fingers            = fingers

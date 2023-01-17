@@ -11,83 +11,78 @@ class LeftHand:
         self.frame      = frame
         self.isImg      = False
         self.i          = 0
+        self.count      = 0
         self.tracking   = ht.handDetector(detectionCon=0.75, maxHands=1, op='Left')
         #print(type(self.frame))
 
-    def HandCapture(self):
-        pid = os.pid
-
+    def showImage(self, img):
+        cv.imshow('Test', img)
+        cv.waitKey(3)
+        
+    def imageCapture(self, img):
+        self.frame = img
         # Verify camera errors
-        #if(type(self.frame) == np.ndarray):
-        #    self.isImg = True
-        #else:
-         #   print("Error openning the image")
-          #  self.isImg = False
+        if(type(self.frame) == np.ndarray):
+            self.isImg = True
+            # Flip frame to correct predict
+            self.frame = cv.flip(self.frame, 1)
+            #self.showImage(self.frame)
+        else:
+           print("Error openning the image")
+           self.isImg = False
+               
+    def HandCapture(self, img):
+        #print("here I am")
+        
+        # Capturing the first image to processing
+        self.imageCapture(img)
+
+        if self.isImg and not rospy.is_shutdown():
+            #print(self.isImg)
             
-
-        #while(self.isImg):
-
-        # Flip frame to correct predict
-        
-        
-        
-
-        # Hand's contour
-        #contour         = self.tracking.findHands(self.frame, op='Left') # OP select the hand to detect
-        """
-        self.i         += 1 
-
-        level = self.tracking.levelOutput(self.frame)
-        
-        print('Frame Flip - ok')
-        
-        if level:
-            print(str(level) + "%")
+            # Hand's contour
+            contour         = self.tracking.findHands(self.frame, op='Left') # OP select the hand to detect
+            self.i         += 1
+            level           = self.tracking.levelOutput(self.frame)
             
-        num = self.tracking.labelText()            
-        #print(num + "%")
+            if level:
+                print(str(level) + "%")
+                
+            num = self.tracking.labelText()  
+            
+            if self.isImg:
+                font     = cv.FONT_HERSHEY_COMPLEX
+                left     = (50,50)
+                leftSt   = (50, 80)
+                right    = (380, 50)
+                rightSt  = (380, 80)
+                level    = str(self.tracking.levelOutput(self.frame)) + '%'
+
+                if self.tracking.countFingers > -1:
+                    if self.tracking.label == 'Left':
+                        
+                        #print(self.tracking.handFingers, self.tracking.side,self.tracking.countFingers, self.tracking.op)
+                       
+                        # Pub Here
+                        #pub = Pub.Publisher(self.tracking.handFingers, self.tracking.side, self.tracking.countFingers, self.tracking.op)
+                        #pub.talker()
+                        
+                        """ print(tracking.mpHands)
+                        print(tracking.hands)
+                        
+                        print("ok") """
+                        
+                        cv.putText(self.frame, num, left, font, 1, (255,0,0), 2)
+                        cv.putText(self.frame, level, leftSt, font, 1, (255,0,0), 2)
+                    else:
+                        pass
+                        #cv.putText(self.frame, num, right, font, 1, (255,0,0), 2)
+                        #cv.putText(self.frame, level, rightSt, font, 1, (255,0,0), 2)
         
-        if self.isImg:
-            font     = cv.FONT_HERSHEY_COMPLEX
-            left     = (50,50)
-            leftSt   = (50, 80)
-            right    = (380, 50)
-            rightSt  = (380, 80)
-            level    = str(self.tracking.levelOutput(self.frame)) + '%'
-            
-            if self.tracking.countFingers > -1:
-                print('Count Fingers - ok')
-                if self.tracking.label == 'Left':
-                    
-                    # Pub Here
-                     pub = Pub.Publisher(self.tracking.handFingers, self.tracking.side, 
-                                        self.tracking.countFingers, self.tracking.op)
-                    pub.talker() 
-                    
-                   
-                    #cv.putText(self.frame, num, left, font, 1, (255,0,0), 2)
-                    #cv.putText(self.frame, level, leftSt, font, 1, (255,0,0), 2)
-                    
-             #   else:
-                    #cv.putText(self.frame, num, right, font, 1, (255,0,0), 2)
-                    #cv.putText(self.frame, level, rightSt, font, 1, (255,0,0), 2)
+                cv.imshow('Frame', self.frame)
+                key = cv.waitKey(1)
+        
 
-            #cv.imshow('Frame', self.frame)
-            #cv.waitKey(3)
-
-            # Exit by user hand
-            if tracking.handFingers == "01100":
-                break  
-
-            # Exit by user using keyboard
-           # if key == ord('q'):
-            #    break
-            
-            self.isImg = False
-            #else:
-             #   break
-
-        #cv.destroyAllWindows()
-        """
+        
 
 
