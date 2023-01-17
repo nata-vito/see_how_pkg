@@ -6,6 +6,7 @@ import mediapipe as mp
 #from api_request import FireRise 
 
 class handDetector():
+    
     # Parameters
     def __init__(self, mode=True, maxHands=1, modelComplexity=1, detectionCon=0.5, trackCon=0.5, op = ''):
         # To video streal False, any image true
@@ -147,7 +148,6 @@ class handDetector():
             self.handFingers = self.deconstructionHand()
             self.side        = self.label
             
-
     # Send data to api 
     """ def sendToApi(tracking):
         api = FireRise("https://myhand-ff333-default-rtdb.firebaseio.com/", tracking.fingers)
