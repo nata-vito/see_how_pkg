@@ -1,71 +1,38 @@
 #!/usr/bin/env python3
+import sys
 import rospy
 import cv2 as cv
-import numpy as np
-import pub_see_how as Pub
-import hand_tracking as ht
+import ros_numpy
+import hands as Hands
+from sensor_msgs.msg import Image
 
-class LeftHand:
-    def __init__(self, frame = None):
-        self.frame      = frame
-        self.isImg      = False
-        self.i          = 0
-        self.count      = 0
-        self.tracking   = ht.handDetector(detectionCon=0.75, maxHands=1, op='Left')
+class image_converter:
+    def __init__(self):
+        # Topic to read the image msg data
+        rospy.init_node('left_hand', anonymous=True)
+        self.image_sub = rospy.Subscriber("camera", Image, self.image_callback)
+        self.img = None
+        self.hand = Hands.Hand()
 
-    def showImage(self, img):
-        cv.imshow('Test', img)
-        cv.waitKey(3)
+    def image_callback(self, msg):
+        self.img = ros_numpy.numpify(msg)
+        self.hand.Left(self.img)
+    
+    def showImage(self):
+        if self.img is None:
+            print("Could not read the image.")
+        else:  
+            cv.imshow("Image Window", self.img)      
+            cv.waitKey(3)   
         
-    def imageCapture(self, img):
-        self.frame = img
         
-        # Verify camera errors
-        if(type(self.frame) == np.ndarray):
-            self.isImg = True
-            
-            # Flip frame to correct predict
-            self.frame = cv.flip(self.frame, 1)
-        else:
-           print("Error openning the image")
-           self.isImg = False
-               
-    def HandCapture(self, img):
-        
-        # Capturing the first image to processing
-        self.imageCapture(img)
-
-        if self.isImg and not rospy.is_shutdown():
-            
-            # Hand's contour
-            contour         = self.tracking.findHands(self.frame, op='Left') # OP select the hand to detect
-            self.i         += 1
-            level           = self.tracking.levelOutput(self.frame)
-            
-            if level:
-                print(str(level) + "%")
-                
-            num = self.tracking.labelText()  
-            
-            font     = cv.FONT_HERSHEY_COMPLEX
-            left     = (50,50)
-            leftSt   = (50, 80)
-            right    = (380, 50)
-            rightSt  = (380, 80)
-            level    = str(level) + '%'
-
-            if self.tracking.countFingers > -1 and self.tracking.label == 'Left':                   
-                cv.putText(self.frame, num, left, font, 1, (255,0,0), 2)
-                cv.putText(self.frame, level, leftSt, font, 1, (255,0,0), 2)
-
-            # Pub Here
-            pub = Pub.Publisher(self.tracking.handFingers, self.tracking.side, self.tracking.countFingers, self.tracking.op, self.tracking.levelOutput(self.frame))
-            pub.talker()
-            
-            cv.imshow('Frame', self.frame)
-            key = cv.waitKey(1)
-        
-
-        
-
-
+def main(args):
+    ic = image_converter()
+    
+    
+if __name__ == "__main__":
+    try:
+        main(sys.argv)
+        rospy.spin()
+    except rospy.ROSInterruptException:
+        print("Shutting down")
