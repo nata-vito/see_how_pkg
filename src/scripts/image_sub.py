@@ -3,12 +3,14 @@ import sys
 import rospy
 import cv2 as cv
 import ros_numpy
+import pub_see_how as Pub
 import left_hand as lfHand
 from sensor_msgs.msg import Image
 
 class image_converter:
     def __init__(self):
         # Topic to read the image msg data
+        rospy.init_node('image_converter', anonymous=True)
         self.image_sub = rospy.Subscriber("camera", Image, self.image_callback)
         self.img = None
         self.lf = lfHand.LeftHand()
@@ -28,9 +30,7 @@ class image_converter:
         
 def main(args):
     ic = image_converter()
-    rospy.init_node('image_converter', anonymous=True)
     
-
     
 if __name__ == "__main__":
     try:
