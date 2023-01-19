@@ -3,7 +3,6 @@ import sys
 import rospy
 import cv2 as cv
 import ros_numpy
-import pub_see_how as Pub
 import left_hand as lfHand
 from sensor_msgs.msg import Image
 
