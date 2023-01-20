@@ -7,7 +7,7 @@ import mediapipe as mp
 class handDetector():
     
     # Parameters
-    def __init__(self, mode=True, maxHands=1, modelComplexity=1, detectionCon=0.5, trackCon=0.5, op = ''):
+    def __init__(self, mode=True, maxHands=2, modelComplexity=0, detectionCon=0.5, trackCon=0.5, op = ''):
         
         # To video streal False, any image true
         self.mode               = mode     
@@ -124,7 +124,7 @@ class handDetector():
                         self.fingers.append(1)
                         
                 # hand thumb -> Right
-                elif pose[ids[0]][1] < pose[ids[0] - 1][1] and self.op == "Right":
+                if pose[ids[0]][1] < pose[ids[0] - 1][1] and self.op == "Right":
                     self.fingers.append(1)
                     
                 else: 
