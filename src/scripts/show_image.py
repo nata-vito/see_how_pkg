@@ -1,8 +1,21 @@
 #!/usr/bin/env python3
 import rospy
 import cv2 as cv
-import ros_numpy
+import subscriber as sub
 from sensor_msgs.msg import Image
 
-
-        
+def displayImg():
+    camera              = sub.ImgCon(flag = 1)
+    left                = sub.SubLeft()
+    print(left.getData())
+    #camera              = sub.ImgCon(data = left.data, flag = 1)
+    
+    
+    
+    
+if __name__ == '__main__':
+    try:
+        displayImg()
+        rospy.spin()
+    except rospy.ROSInterruptException:
+        print("Shutting down")

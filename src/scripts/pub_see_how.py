@@ -23,17 +23,17 @@ class Publisher:
         rate.sleep()
     
         # Message construction
-        msg                 = Hand()
-        msg.header          = Header(stamp = rospy.Time.now(), frame_id = 'odom')
-        msg.side            = self.side
-        msg.fingers         = self.fingers
-        msg.countFingers    = int(self.countFingers)
-        msg.nodeName        = self.nodeName  
-        msg.level           = self.level
-        msg.pose_X          = self.pose_X
-        msg.pose_Y          = self.pose_Y
-        msg.pose_St_X       = self.pose_St_X
-        msg.pose_St_Y       = self.pose_St_Y
+        msg                     = Hand()
+        msg.header              = Header(stamp = rospy.Time.now(), frame_id = 'odom')
+        msg.side                = self.side
+        msg.fingers             = self.fingers
+        msg.countFingers        = int(self.countFingers)
+        msg.nodeName            = self.nodeName  
+        msg.level               = self.level
+        msg.pose_X              = self.pose_X
+        msg.pose_Y              = self.pose_Y
+        msg.pose_St_X           = self.pose_St_X
+        msg.pose_St_Y           = self.pose_St_Y
         
         if self.nodeName == self.side:
             self.pub.publish(msg)
