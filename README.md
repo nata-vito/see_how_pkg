@@ -36,9 +36,9 @@ Antes de começar, verifique se você atendeu aos seguintes requisitos:
 * `math`
 * `cv_bridge`
 
-## 🚀 Instalando <nome_do_projeto>
+## 🚀 Instalando SEE HOW PACKAGE
 
-Para instalar o <nome_do_projeto>, siga estas etapas:
+Para instalar o SEE HOW PACKAGE, siga estas etapas:
 
 Linux:
 ```
@@ -51,9 +51,9 @@ catkin_make
 source devel/setup.bash
 ```
 
-## ☕ Usando <nome_do_projeto>
+## ☕ Usando SEE HOW PACKAGE
 
-Para usar <nome_do_projeto>, siga estas etapas:
+Para usar SEE HOW PACKAGE, siga estas etapas:
 
 ```
 roslaunch see_how_pkg see_how.launch
@@ -62,9 +62,9 @@ roslaunch see_how_pkg see_how.launch
 Caso você não consiga executar, certifique-se que foi realizado o `source devel/setup.bash` dentro da pasta ws. Caso não, execute o comando novamente em todas as janelas do terminal.
 
 
-## 📫 Contribuindo para <nome_do_projeto>
+## 📫 Contribuindo para SEE HOW PACKAGE
 <!---Se o seu README for longo ou se você tiver algum processo ou etapas específicas que deseja que os contribuidores sigam, considere a criação de um arquivo CONTRIBUTING.md separado--->
-Para contribuir com <nome_do_projeto>, siga estas etapas:
+Para contribuir com SEE HOW PACKAGE, siga estas etapas:
 
 1. Bifurque este repositório.
 2. Crie um branch: `git checkout -b <nome_branch>`.
