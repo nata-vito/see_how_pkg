@@ -6,3 +6,7 @@ pub_see_how.pyc
 tes.pyc
 /img/imgTest.jpg
 /__pycache__/
+server.py
+tes.py
+dash-controls.py
+client.py

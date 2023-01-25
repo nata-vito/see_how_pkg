@@ -10,6 +10,7 @@ def videoCapture():
     cap         = cv.VideoCapture(0)
     i           = 0
     tracking    = ht.handDetector(detectionCon=0.75, maxHands=1, op='Left')
+    
     # Hand landmarks 
     #ids         = [4, 8, 12, 16, 20]
 

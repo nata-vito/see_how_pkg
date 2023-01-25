@@ -1,5 +1,10 @@
 Header header
 string side
-int64 fingers
+string fingers
 int64 countFingers
 string nodeName
+int64 level
+int32 pose_X
+int32 pose_Y
+int32 pose_St_X
+int32 pose_St_Y
