@@ -8,22 +8,22 @@
 ![Bitbucket open issues](https://img.shields.io/bitbucket/issues/iuricode/README-template?style=for-the-badge)
 ![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/iuricode/README-template?style=for-the-badge)
 
-<img src="img/show-img-processed.png" alt="Imagem processada e tópico ROS sendo publicado">
+<img src="img/show-img-processed.png" alt="Image processed and ROS topic being published">
 
-> Projeto desenvolvido com o objetivo de integrar tecnologias como a visão computacional ao ROS, visando a facilidade de adaptação. 
+> Project developed with the objective of integrating technologies such as computer vision to the ROS, aiming for ease of adaptation. 
 
-### Ajustes e melhorias
+### Adjustments and improvements
 
-O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
+The project is still under development and the next updates will focus on the following tasks:
 
-- [ ] Visualização Grafica dos Resultados
-- [ ] Imagem Docker 
+- [ ] Graphical View of the Results
+- [ ] Docker Image
 - [ ] FastApi
-- [ ] Integração com Banco de Dados
+- [ ] Database Integration
 
-## 💻 Pré-requisitos
+## 💻 PPrerequisites
 
-Antes de começar, verifique se você atendeu aos seguintes requisitos:
+Before you begin, check that you have met the following requirements:
 <!---Estes são apenas requisitos de exemplo. Adicionar, duplicar ou remover conforme necessário--->
 * `Ubuntu 18.04`
 * `ROS Melodic`
@@ -36,9 +36,9 @@ Antes de começar, verifique se você atendeu aos seguintes requisitos:
 * `math`
 * `cv_bridge`
 
-## 🚀 Instalando SEE HOW PACKAGE
+## 🚀 Installing SEE HOW PACKAGE
 
-Para instalar o SEE HOW PACKAGE, siga estas etapas:
+To install the SEE HOW PACKAGE, follow these steps:
 
 Linux:
 ```
@@ -51,32 +51,32 @@ catkin_make
 source devel/setup.bash
 ```
 
-## ☕ Usando SEE HOW PACKAGE
+## ☕ Using SEE HOW PACKAGE
 
-Para usar SEE HOW PACKAGE, siga estas etapas:
+To use SEE HOW PACKAGE, follow these steps:
 
 ```
 roslaunch see_how_pkg see_how.launch
 ```
 
-Caso você não consiga executar, certifique-se que foi realizado o `source devel/setup.bash` dentro da pasta ws. Caso não, execute o comando novamente em todas as janelas do terminal.
+If you can't run it, make sure you have `source devel/setup.bash` inside the ws folder. If not, run the command again in all terminal windows.
 
 
-## 📫 Contribuindo para SEE HOW PACKAGE
+## 📫 Contributing to SEE HOW PACKAGE
 <!---Se o seu README for longo ou se você tiver algum processo ou etapas específicas que deseja que os contribuidores sigam, considere a criação de um arquivo CONTRIBUTING.md separado--->
-Para contribuir com SEE HOW PACKAGE, siga estas etapas:
+To contribute to SEE HOW PACKAGE, follow these steps:
 
-1. Bifurque este repositório.
-2. Crie um branch: `git checkout -b <nome_branch>`.
-3. Faça suas alterações e confirme-as: `git commit -m '<mensagem_commit>'`
-4. Envie para o branch original: `git push origin <nome_do_projeto> / <local>`
-5. Crie a solicitação de pull.
+1. Fork this repository.
+2. Create a branch: `git checkout -b <nome_branch>`.
+3. Make your changes and confirm them: `git commit -m '<mensagem_commit>'`
+4. Send to original branch: `git push origin <nome_do_projeto> / <local>`
+5. Create the pull request.
 
-Como alternativa, consulte a documentação do GitHub em [como criar uma solicitação pull](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
+Alternatively, see the GitHub documentation on [how to create a pull request].(https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
 
-## 🤝 Colaboradores
+## 🤝 Collaborators
 
-Agradecemos às seguintes pessoas que contribuíram para este projeto:
+We thank the following people who contributed to this project:
 
 <table>
   <tr>
@@ -92,12 +92,12 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
 </table>
 
 
-## 😄 Seja um dos contribuidores<br>
+## 😄 Be one of the contributors<br>
 
-Quer fazer parte desse projeto? Clique [AQUI](CONTRIBUTING.md) e leia como contribuir.
+Want to be part of this project? Click [HERE](CONTRIBUTING.md) and read how to contribute.
 
-## 📝 Licença
+## 📝 License
 
-Esse projeto está sob licença. Veja o arquivo [LICENÇA](LICENSE.md) para mais detalhes.
+This project is under license. See the file [LICENSE](LICENSE.md) for more details.
 
-[⬆ Voltar ao topo](#SEE-HOW-PACKAGE)<br>
+[⬆ Back to top](#SEE-HOW-PACKAGE)<br>
