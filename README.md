@@ -1,4 +1,3 @@
-ROS Package Development using Computer Vision
 # SEE HOW PACKAGE
 
 <!---Esses são exemplos. Veja https://shields.io para outras pessoas ou para personalizar este conjunto de escudos. Você pode querer incluir dependências, status do projeto e informações de licença aqui--->
@@ -9,7 +8,7 @@ ROS Package Development using Computer Vision
 ![Bitbucket open issues](https://img.shields.io/bitbucket/issues/iuricode/README-template?style=for-the-badge)
 ![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/iuricode/README-template?style=for-the-badge)
 
-<img src="exemplo-image.png" alt="exemplo imagem">
+<img src="src/see_how_pkg/img/show-img-processed.png" alt="Imagem processada e tópico ROS sendo publicado">
 
 > Linha adicional de texto informativo sobre o que o projeto faz. Sua introdução deve ter cerca de 2 ou 3 linhas. Não exagere, as pessoas não vão ler.
 
