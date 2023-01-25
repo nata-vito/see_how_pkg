@@ -21,7 +21,7 @@ The project is still under development and the next updates will focus on the fo
 - [ ] FastApi
 - [ ] Database Integration
 
-## 💻 PPrerequisites
+## 💻 Prerequisites
 
 Before you begin, check that you have met the following requirements:
 <!---Estes são apenas requisitos de exemplo. Adicionar, duplicar ou remover conforme necessário--->
