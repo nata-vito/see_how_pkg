@@ -6,8 +6,6 @@ from sensor_msgs.msg import Image
 
 def displayImg():
     camera              = sub.ImgCon(flag = 1)
-    left                = sub.SubLeft()
-    print(left.getData())
     #camera              = sub.ImgCon(data = left.data, flag = 1)
     
     
