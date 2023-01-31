@@ -5,7 +5,7 @@ networkx
 numpy
 Pillow
 PyYAML
-ros_numpy
+numpy-ros
 scikit-image
 scipy
 sensor-msgs
