@@ -2,7 +2,7 @@ mediapipe==0.8.2
 netifaces
 opencv-python==4.5.4.60
 networkx
-numpy==1.19.3
+numpy==1.19.5
 Pillow
 PyYAML
 numpy-ros
