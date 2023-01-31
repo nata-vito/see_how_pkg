@@ -1,0 +1,17 @@
+opencv-python                 == 4.7.0.68
+mediapipe                     == 0.9.0.1
+netifaces                     == 0.11.0
+networkx                      == 3.0
+numpy                         == 1.23.5
+Pillow                        == 9.3.0
+PyYAML                        == 6.0
+ros_numpy                     == 0.0.3
+scikit-image                  == 0.19.3
+scipy                         == 1.9.3
+sensor-msgs                   == 1.12.8
+websocket-client              == 1.5.0
+yolov5                        == 7.0.7
+pandas                        == 1.5.3
+facenet-pytorch               == 2.5.2
+tqdm                          == 4.64.1
+
