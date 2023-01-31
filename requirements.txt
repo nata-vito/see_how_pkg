@@ -2,13 +2,12 @@ mediapipe
 netifaces
 opencv-python
 networkx
-numpy
+numpy==1.19.3
 Pillow
 PyYAML
-numpy-ros
+numpy-ros==4.7.0.68
 scikit-image
 scipy
-sensor-msgs
 websocket-client
 yolov5
 pandas
