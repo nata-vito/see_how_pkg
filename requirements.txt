@@ -1,11 +1,11 @@
 mediapipe
 netifaces
-opencv-python
+opencv-python==4.7.0.68
 networkx
 numpy==1.19.3
 Pillow
 PyYAML
-numpy-ros==4.7.0.68
+numpy-ros
 scikit-image
 scipy
 websocket-client
