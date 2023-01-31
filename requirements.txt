@@ -1,4 +1,4 @@
-mediapipe==0.9.0.1
+mediapipe==0.8.2
 netifaces==0.11.0
 opencv-python==4.7.0.68
 networkx==3.0
