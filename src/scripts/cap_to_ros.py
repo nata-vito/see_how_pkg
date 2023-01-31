@@ -24,6 +24,7 @@ def talker():
         
         while True:
             ret, frame = cap.read()
+            #print(frame)
             
             if not ret:
                 break
