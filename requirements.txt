@@ -1,6 +1,6 @@
-mediapipe
+mediapipe==0.8.2
 netifaces
-opencv-python
+opencv-python==3.4.5
 networkx
 numpy
 Pillow
