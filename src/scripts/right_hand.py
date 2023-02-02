@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/local/bin/python3.9
 import rospy
 import hands as Hands
 from subscriber import ImgCon
