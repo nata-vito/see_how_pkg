@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/local/bin/python3.9
 import rospy
 import cv2 as cv
 import ros_numpy
@@ -33,6 +33,7 @@ class ImgCon:
         elif self.label == 'right_hand':
             self.hand.Right(self.img)
         
+        
         if self.flag == 1:
             self.showImage()
    
@@ -42,20 +43,22 @@ class ImgCon:
         if self.img is None:
             print("Could not read the image.")
         else:
-            if self.data != None:
+            cv.imshow("Image Window", self.img)      
+            cv.waitKey(3)   
+            """ if self.data != None:
                 
                 
                 font = cv.FONT_HERSHEY_COMPLEX
 
                 
-                #print(self.img)
+                print(self.img)
                 
-                cv.putText(self.img, str(self.data.countFingers), (self.data.pose_x, self.data.pose_Y), font, 1, (255,0,0), 2)
-                cv.putText(self.img, self.data.level, (self.data.pose_St_X, self.data.pose_St_Y), font, 1, (255,0,0), 2)
+                #cv.putText(self.img, str(self.data.countFingers), (self.data.pose_x, self.data.pose_Y), font, 1, (255,0,0), 2)
+                #cv.putText(self.img, self.data.level, (self.data.pose_St_X, self.data.pose_St_Y), font, 1, (255,0,0), 2)
                 
                 
                 cv.imshow("Image Window", self.img)      
-                cv.waitKey(3)   
+                cv.waitKey(3)    """
             #print(self.data)
         
         

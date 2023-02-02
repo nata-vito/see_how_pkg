@@ -1,10 +1,11 @@
-#!/usr/bin/env python2
+#!/usr/bin/python
 
 import cv2
 import rospy
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge, CvBridgeError
 
+print(0)
 # Video capture -> webcam
 cap = cv2.VideoCapture(0)
 
@@ -24,6 +25,7 @@ def talker():
         
         while True:
             ret, frame = cap.read()
+            #print(frame)
             
             if not ret:
                 break

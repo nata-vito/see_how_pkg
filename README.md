@@ -91,7 +91,6 @@ We thank the following people who contributed to this project:
   </tr>
 </table>
 
-
 ## 😄 Be one of the contributors<br>
 
 Want to be part of this project? Click [HERE](CONTRIBUTING.md) and read how to contribute.

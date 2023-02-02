@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/local/bin/python3.9
 import rospy
 import cv2 as cv
 import subscriber as sub
@@ -6,8 +6,6 @@ from sensor_msgs.msg import Image
 
 def displayImg():
     camera              = sub.ImgCon(flag = 1)
-    left                = sub.SubLeft()
-    print(left.getData())
     #camera              = sub.ImgCon(data = left.data, flag = 1)
     
     

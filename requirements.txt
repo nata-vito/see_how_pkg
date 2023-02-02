@@ -1,0 +1,16 @@
+mediapipe
+netifaces
+opencv-python==4.2.0
+networkx
+numpy
+Pillow
+PyYAML
+numpy-ros
+scikit-image
+scipy
+websocket-client
+yolov5
+pandas
+facenet-pytorch
+tqdm
+
