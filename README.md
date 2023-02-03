@@ -1,3 +1,5 @@
+<center>
+
 # SEE HOW PACKAGE
 
 ![GitHub python version](https://img.shields.io/badge/Python-3.9.0-green?style=flat-square&logo=python)
@@ -7,7 +9,8 @@
 ![Bitbucket docker](https://img.shields.io/badge/Docker-gray?style=flat-square&logo=docker)
 ![Bitbucket nvidia container toolkit](https://img.shields.io/badge/NVIDIA_Container_Toolkit-gray?style=flat-square&logo=nvidia)
 ![Bitbucket opencv](https://img.shields.io/badge/opencv-blue?style=flat-square&logo=opencv)
-![Bitbucket opencv](https://img.shields.io/badge/opencv-blue?style=flat-square&logo=opencv)
+</center>
+
 
 <img src="img/show-img-processed.png" alt="Image processed and ROS topic being published">
 
@@ -58,19 +61,19 @@ Docker:
   - First of all, install the NVIDIA Container Toolkit and its drivers following the official Nvidia documentation. NVIDIA Documentation: https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker
   
 ---
-- Running the image
+### Running the image
 
-  - After that, run the commands below:
+After that, run the commands below.
 
-      Command to download the image:
-
+  - Command to download the image: 
+      
       ```docker pull natavitorino/cuda-ros:<tag version here>```
 
-      Command to release screen access:
+  - Command to release screen access:
 
       ```xhost +local:docker```
 
-      Command to run the contianer with privileges:
+  - Command to run the contianer with privileges:
       
       ```docker run -it --rm --privileged --net=host --env=NVIDIA_VISIBLE_DEVICES=all --env=NVIDIA_DRIVER_CAPABILITIES=all --env=DISPLAY --env=QT_X11_NO_MITSHM=1 -v /tmp/.X11-unix:/tmp/.X11-unix --gpus all natavitorino/cuda-ros:<tag version here> bash```
 
@@ -78,9 +81,9 @@ Docker:
 ---
   - Tags:
 
-      1.0 - Version without Yolo support
+      ```1.0``` - Version without Yolo support
 
-      1.1 - Version with Yolo support
+      ```1.1``` - Version with Yolo support
 ---
 
 ## ☕ Using SEE HOW PACKAGE
