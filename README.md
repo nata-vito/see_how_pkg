@@ -1,7 +1,5 @@
 # SEE HOW PACKAGE
 
-Esses são exemplos. Veja https://shields.io para outras pessoas ou para personalizar este conjunto de escudos. Você pode querer incluir dependências, status do projeto e informações de licença aqui--->
-
 ![GitHub python version](https://img.shields.io/badge/Python-3.9.0-green?style=flat-square&logo=python)
 ![GitHub python version](https://img.shields.io/badge/Python-2.7.15-green?style=flat-square&logo=python)
 ![GitHub ros version](https://img.shields.io/badge/ROS-Melodic-blue?style=flat-square&logo=ros)
