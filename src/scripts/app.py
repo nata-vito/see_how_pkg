@@ -1,20 +1,46 @@
-from typing import Union
+from typing import Union, Optional, Query
 from fastapi import FastAPI
 from pydantic import BaseModel
 
 app = FastAPI()
 
-class Brian(BaseModel):
-    name: str
-    price: float
-    is_offer: Union[bool, None] = None
+class BrianHand(BaseModel):
+    nodeName: str
+    side: str
+    countFingers: int
+    level: int
+
+app = FastAPI()
+
+@app.get('/')
+def hello():
+    return {"Hello": "World"}
+
+@app.get('/')
+def hello_post():
+    return {"Success": "You posted"}
+
+@app.get('/something')
+def something():
+    return {"Data": "Something"}
+
+def search_person(age: Optional[int] = Query(None, title = 'Age', description = "The age to filter for"),
+                  name: Optional[str] = Query(None, title = "Name", discription = "The name to filter for")):
+    
+    person1 = [p for p in people if p['age'] == age]
+    
+    
+    
+    
+
+""" @app.post("/")
+async def create_hand(hand: BrianHand):
+    hand.nodeName = "Nata"
+    hand.side = "Left"
+    hand.countFingers = 11000
+    hand.level = 50
+    return hand
 
 @app.get("/")
-def read_root():
-    return {"Wellcome to": "Brian Core!", 
-            "none":"none"}
-
-
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Union[str, None] = None):
-    return {"item_id": item_id, "q": q}
+def read_hand(hand: BrianHand):
+    return hand """
