@@ -4,15 +4,8 @@ from pydantic import BaseModel
 
 app = FastAPI()
 
-# Structure of The Hand Object
-hands = {
-    1: {
-        "name": "Natanael",
-        "side": "Left",
-        "countFingers": 10011,
-        "level": 100
-    }
-}
+# Structure to storage data 
+hands = {}
 
 # Obj to create new Hands
 class CreateHand(BaseModel):
@@ -36,8 +29,7 @@ def index():
 # Get hand by id
 @app.get('/hand/{hand_id}')
 def get_hand_id(hand_id: int = Path(None, description = "The id of the hand you want to view")):
-
-    return hands[hand_id]
+       return hands[hand_id]
 
 
 # Get hand by name
@@ -45,9 +37,7 @@ def get_hand_id(hand_id: int = Path(None, description = "The id of the hand you 
 def get_hand_name(name: Optional[str] = None):
     
     for hand_id in hands:
-        if hand_id == 1 and name  == hands[hand_id]["name"]:
-            return hands[hand_id]
-        if hand_id > 1 and name  == hands[hand_id].name:
+        if name == hands[hand_id].name:
             return hands[hand_id]
         
     return {"Data": "Not Found"}
@@ -68,36 +58,20 @@ def creat_hand(hand_id: int, hand: CreateHand):
 @app.put('/update-hand/{hand_id}')
 def update_hand(hand_id: int, hand: UpdateHand):
     
-    if hand_id > 1:
-        if hand_id not in hands: 
-            return {"Error": "Hand does not exist"} 
+    if hand_id not in hands: 
+        return {"Error": "Hand does not exist"} 
+    
+    if hand.name != None:
+        hands[hand_id].name = hand.name
         
-        if hand.name != None:
-            hands[hand_id].name = hand.name
-            
-        if hand.side != None:
-            hands[hand_id].side = hand.side
-            
-        if hand.countFingers != None:
-            hands[hand_id].countFingers = hand.countFingers
-            
-        if hand.level != None:
-            hands[hand_id].level = hand.level
-    else:
-        if hand_id not in hands: 
-            return {"Error": "Hand does not exist"} 
+    if hand.side != None:
+        hands[hand_id].side = hand.side
         
-        if hand.name != None:
-            hands[hand_id]["name"] = hand.name
-            
-        if hand.side != None:
-            hands[hand_id]["side"] = hand.side
-            
-        if hand.countFingers != None:
-            hands[hand_id]["countFingers"] = hand.countFingers
-            
-        if hand.level != None:
-            hands[hand_id]["level"] = hand.level
+    if hand.countFingers != None:
+        hands[hand_id].countFingers = hand.countFingers
+        
+    if hand.level != None:
+        hands[hand_id].level = hand.level
           
     return hands[hand_id]
   
