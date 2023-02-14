@@ -1,4 +1,3 @@
-#!/usr/local/bin/python3
 import rospy
 from std_msgs.msg import Header
 from see_how_pkg.msg import Hand
