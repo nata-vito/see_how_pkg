@@ -23,7 +23,7 @@ The project is still under development and the next updates will focus on the fo
 
 - [ ] Graphical View of the Results
 - [x] Docker Image
-- [ ] FastApi
+- [x] FastApi
 - [ ] Database Integration
 ---
 ## 💻 Prerequisites
