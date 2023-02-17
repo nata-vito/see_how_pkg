@@ -36,7 +36,7 @@ class ImgCon:
         
         if self.flag == 1:
             self.showImage()
-            print(self.img)
+            #print(self.img)
    
     
     def showImage(self):
