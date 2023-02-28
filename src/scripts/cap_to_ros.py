@@ -11,7 +11,7 @@ from cv_bridge import CvBridge, CvBridgeError
 bridge = CvBridge()
 
 # Video capture -> webcam
-cap = cv2.VideoCapture('http://192.168.49.1:8080/?action=stream')
+cap = cv2.VideoCapture('http://172.17.52.190:8090/?action=stream')
 
 # Verifying the camera input 
 print(cap.isOpened())
