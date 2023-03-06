@@ -11,5 +11,4 @@
     <node pkg = "see_how_pkg" type = "cap_to_ros.py" name = "camera_node" output = "screen" respawn = "true"></node> 
     <node pkg = "see_how_pkg" type = "left_hand.py" name = "left_hand_node" output = "screen" respawn = "true"></node>
     <node pkg = "see_how_pkg" type = "right_hand.py" name = "right_hand_node" output = "screen" respawn = "true"></node>
-<!--     <node pkg = "see_how_pkg" type = "show_image.py" name = "image_node" output = "screen" respawn = "true"></node>-->
 </launch>

@@ -53,26 +53,34 @@ class ImgCon:
         
 class SubLeft:
     def __init__(self):
-        
-        rospy.Subscriber('/Left', Hand, self.left_callback)
+        rospy.init_node('sub_left_hand', anonymous=True)
+        sub                     = rospy.Subscriber('/Left', Hand, self.left_callback)
         self.data               = None
         
     def left_callback(self, data):
-        
         self.data               = data
-        #print(data)
+        print(data.level)
     
     def getData(self):
         return self.data
     
         
 class SubRight:
-    def __init__(self):
-        
-        rospy.Subscriber('/Right', Hand, self.right_callback)
-        self.data               = None
-        
+    
+    def __init__(self, flag = 0):
+        rospy.init_node('sub_right_hand', anonymous=True)
+        sub                     = rospy.Subscriber('/Right', Hand, self.right_callback)
+        self.side               = ''
+        self.fingers            = ''
+        print(flag)
+              
     def right_callback(self, data):
+        self.side               = data.side
+        self.fingers            = data.fingers
         
-        self.data               = data
-        #print(data)
+        
+    def getSide(self):
+        return self.side
+    
+    def getFingers(self):
+        return self.fingers

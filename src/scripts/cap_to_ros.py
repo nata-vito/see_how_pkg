@@ -2,6 +2,7 @@
 
 import cv2
 import rospy
+import base64
 from socket_nucleus import SockCLient as sck
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge, CvBridgeError
@@ -19,8 +20,10 @@ print(cap.isOpened())
 
 # Publishing Camera Image in /camera ROS Topic
 def talker():
-    pub                 = rospy.Publisher('/camera', Image, queue_size = 1)
+    pub_nparray         = rospy.Publisher('/camera', Image, queue_size = 1)
     rospy.init_node('image', anonymous=True)
+    pub_base64         = rospy.Publisher('/camerabase64', Image, queue_size = 1)
+    #rospy.init_node('image', anonymous=True)
     rate                = rospy.Rate(10)
     #sock                = sck(ip = '127.0.1.1', port = 9999)
     
@@ -32,8 +35,11 @@ def talker():
             if not ret:
                 break
             
-            msg = bridge.cv2_to_imgmsg(frame, "bgr8")
-            pub.publish(msg)
+            msg_np = bridge.cv2_to_imgmsg(frame, "bgr8")
+            msg_64 = base64.b64encode(frame)
+            
+            pub_nparray.publish(msg_np)
+            #pub_base64.publish(msg_64)
             
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break

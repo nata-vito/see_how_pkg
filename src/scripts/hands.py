@@ -69,10 +69,37 @@ class Hand:
             right_y             = 50    
             St_X                = 50
             St_Y                = 80
-            level               = str(level) + '%'                
-
+            level               = str(level) + '%'  
+            command             = 'Nope'
+            
+            # Switch Case to commands 
+            if self.tracking.handFingers   == '00000':
+                command = 'Stop'
+            elif self.tracking.handFingers   == '10001':
+                command = 'Start'
+            elif self.tracking.handFingers   == '01000':
+                command = '1'
+            elif self.tracking.handFingers == '01100':
+                command = '2'
+            elif self.tracking.handFingers == '01110':
+                command = '3'
+            elif self.tracking.handFingers == '01111':
+                command = '4'
+            elif self.tracking.handFingers == '11111':
+                command = '5'
+            elif self.tracking.handFingers   == '10000':
+                command = '6'
+            elif self.tracking.handFingers   == '11000':
+                command = '7'
+            elif self.tracking.handFingers   == '11100':
+                command = '8'
+            elif self.tracking.handFingers   == '11110':
+                command = '9'
+            elif self.tracking.handFingers   == '11111':
+                command = '10'
+                       
             # Pub Here
             pub = Pub.Publisher(self.tracking.handFingers, self.tracking.side, self.tracking.countFingers, self.tracking.op, 
-                                self.tracking.levelOutput(self.frame), right_x, right_y, St_X, St_Y)
+                                self.tracking.levelOutput(self.frame), right_x, right_y, St_X, St_Y, command)
             pub.talker()
             
