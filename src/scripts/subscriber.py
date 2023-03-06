@@ -25,9 +25,8 @@ class ImgCon:
         self.flag               = flag
 
     def image_callback(self, msg):
-        
         self.img = ros_numpy.numpify(msg)
-        
+                
         if self.label == 'left_hand':
             self.hand.Left(self.img)
         elif self.label == 'right_hand':
@@ -37,31 +36,20 @@ class ImgCon:
         if self.flag == 1:
             self.showImage()
             #print(self.img)
-   
+        
+        return self.img
     
     def showImage(self):
         
         if self.img is None:
             print("Could not read the image.")
         else:
-            cv.imshow("Image Window", self.img)      
-            cv.waitKey(3)   
-            """ if self.data != None:
-                
-                
-                font = cv.FONT_HERSHEY_COMPLEX
-
-                
-                print(self.img)
-                
-                #cv.putText(self.img, str(self.data.countFingers), (self.data.pose_x, self.data.pose_Y), font, 1, (255,0,0), 2)
-                #cv.putText(self.img, self.data.level, (self.data.pose_St_X, self.data.pose_St_Y), font, 1, (255,0,0), 2)
-                
-                
-                cv.imshow("Image Window", self.img)      
-                cv.waitKey(3)    """
-            #print(self.data)
-        
+            print(self.img)
+            cv.imshow("Image Window", self.img)
+            cv.waitKey(3) 
+                    
+    def getImg(self):
+        return self.img
         
 class SubLeft:
     def __init__(self):

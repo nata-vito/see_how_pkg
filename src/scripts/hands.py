@@ -52,8 +52,6 @@ class Hand:
             pub = Pub.Publisher(self.tracking.handFingers, self.tracking.side, self.tracking.countFingers, self.tracking.op, 
                                 self.tracking.levelOutput(self.frame), left_x, left_y, left_St_X, left_St_Y)
             pub.talker()
-            
-        
         
     def Right(self, img):
         
