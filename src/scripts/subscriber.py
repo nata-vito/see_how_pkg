@@ -31,6 +31,8 @@ class ImgCon:
             self.hand.Left(self.img)
         elif self.label == 'right_hand':
             self.hand.Right(self.img)
+            # Get the hand bounding box    
+            #self.hand.bounding_box()
         
         
         if self.flag == 1:

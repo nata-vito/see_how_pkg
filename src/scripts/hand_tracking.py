@@ -33,7 +33,7 @@ class handDetector():
         self.side               = ""  # Right/Left
         self.countFingers       = -1
         self.ids                = [4, 8, 12, 16, 20]
-        self.op                 = "" # To define what is the correct hant to detect
+        self.op                 = "" # To define what is the correct hand to detect
         
     # To find hands in video
     def findHands(self, img, op = "", draw=True):
@@ -155,7 +155,32 @@ class handDetector():
                     if self.fingers[i] == 1:
                         self.countFingers += 1
                 
-            
-            
             return self.side + " -> " + str(self.countFingers)
+    
+    # To draw the hand bounding box    
+    def bounding_box(self, img, handNo=0, draw=True, side = ''):
+        h, w, c = img.shape
+        
+        if self.results.multi_hand_landmarks:
+            #myHand = self.results.multi_hand_landmarks[handNo]
+            myHand = self.results.multi_hand_landmarks
+            for handLMs in myHand:
+                x_max = 0
+                y_max = 0
+                x_min = w
+                y_min = h
+                for lm in handLMs.landmark:
+                    x, y = int(lm.x * w), int(lm.y * h)
+                    if x > x_max:
+                        x_max = x
+                    if x < x_min:
+                        x_min = x
+                    if y > y_max:
+                        y_max = y
+                    if y < y_min:
+                        y_min = y
+            coordinates = x_min, y_min, x_max, y_max
+            # if draw: cv.rectangle(img, (x_min, y_min), (x_max, y_max), (0, 255, 0), 2)
+            #print(coordinates)
+            return coordinates
         

@@ -9,3 +9,4 @@ int32 pose_Y
 int32 pose_St_X
 int32 pose_St_Y
 string command
+string bounding_box

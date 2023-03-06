@@ -3,7 +3,7 @@ from std_msgs.msg import Header
 from see_how_pkg.msg import Hand
 
 class Publisher:
-    def __init__(self, fingers = 00000, side = 'None', countFingers = 0 , nodeName = 'Hand', level = 0, X = 0, Y = 0, St_X = 0, St_Y = 0, command = ''):
+    def __init__(self, fingers = 00000, side = 'None', countFingers = 0 , nodeName = 'Hand', level = 0, X = 0, Y = 0, St_X = 0, St_Y = 0, command = '', bounding_box = ''):
         
         self.fingers            = fingers
         self.side               = side
@@ -17,6 +17,7 @@ class Publisher:
         self.pose_St_X          = St_X
         self.pose_St_Y          = St_Y
         self.command            = command
+        self.bounding_box       = bounding_box
         
     def talker(self):
         rate = rospy.Rate(100)
@@ -35,6 +36,7 @@ class Publisher:
         msg.pose_St_X           = self.pose_St_X
         msg.pose_St_Y           = self.pose_St_Y
         msg.command             = self.command
+        msg.bounding_box        = self.bounding_box
         
         if self.nodeName == self.side:
             self.pub.publish(msg)

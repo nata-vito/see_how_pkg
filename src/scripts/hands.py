@@ -71,6 +71,7 @@ class Hand:
             St_Y                = 80
             level               = str(level) + '%'  
             command             = 'Nope'
+            bounding_box        = str(self.tracking.bounding_box(img))
             
             # Switch Case to commands 
             if self.tracking.handFingers   == '00000':
@@ -97,9 +98,12 @@ class Hand:
                 command = '9'
             elif self.tracking.handFingers   == '11111':
                 command = '10'
-                       
+               
             # Pub Here
             pub = Pub.Publisher(self.tracking.handFingers, self.tracking.side, self.tracking.countFingers, self.tracking.op, 
-                                self.tracking.levelOutput(self.frame), right_x, right_y, St_X, St_Y, command)
+                                self.tracking.levelOutput(self.frame), right_x, right_y, St_X, St_Y, command, bounding_box)
             pub.talker()
             
+    def bounding_box(self):
+        co = self.tracking.bounding_box(self.frame)
+        print(co)
