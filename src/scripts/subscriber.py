@@ -75,12 +75,18 @@ class SubRight:
         self.side               = ''
         self.fingers            = ''
         self.command            = ''
+        self.flag               = flag
         #print(flag)
               
     def right_callback(self, data):
         self.side               = data.side
         self.fingers            = data.fingers
         self.command            = data.command
+        
+        # To Start commands processing
+        if self.flag == 1:
+            if self.command == 'Start':
+                print('hehe')
         #print(self.command)
         
         
