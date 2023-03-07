@@ -74,11 +74,14 @@ class SubRight:
         sub                     = rospy.Subscriber('/Right', Hand, self.right_callback)
         self.side               = ''
         self.fingers            = ''
-        print(flag)
+        self.command            = ''
+        #print(flag)
               
     def right_callback(self, data):
         self.side               = data.side
         self.fingers            = data.fingers
+        self.command            = data.command
+        #print(self.command)
         
         
     def getSide(self):

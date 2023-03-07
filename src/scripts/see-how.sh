@@ -16,16 +16,16 @@ Help()
 }
 
 if [ "$1" = "-s" ]; then
-    source ~root/ws/ros_ws/devel/setup.bash 
+    source ~root/ws/devel/setup.bash 
     roslaunch see_how_pkg see_how.launch
 elif [ "$1" = "-l" ]; then
-    source ~root/ws/ros_ws/devel/setup.bash
+    source ~root/ws/devel/setup.bash
     rostopic echo /Left
 elif [ "$1" = "-r" ]; then
-    source ~root/ws/ros_ws/devel/setup.bash
+    source ~root/ws/devel/setup.bash
     rostopic echo /Right
 elif [ "$1" = "-c" ]; then
-    source ~root/ws/ros_ws/devel/setup.bash
+    source ~root/ws/devel/setup.bash
     rostopic echo /camera
 elif [ "$1" = "-h" ]; then
     Help

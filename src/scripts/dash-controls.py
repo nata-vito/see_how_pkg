@@ -1,25 +1,17 @@
-# import the opencv library
-import cv2
-  
-# define a video capture object
-vid = cv2.VideoCapture(0)
-  
-while(True):
-      
-    # Capture the video frame
-    # by frame
-    ret, frame = vid.read()
-  
-    # Display the resulting frame
-    cv2.imshow('frame', frame)
-      
-    # the 'q' button is set as the
-    # quitting button you may use any
-    # desired button of your choice
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
-  
-# After the loop release the cap object
-vid.release()
-# Destroy all the windows
-cv2.destroyAllWindows()
+#!/usr/local/bin/python3.9
+
+import rospy
+from std_msgs.msg import String
+from subscriber import SubRight
+
+def commandListener():
+    listener = SubRight()
+    print(type(listener.getSide()))
+    
+    
+if __name__ == "__main__":
+    try:
+        commandListener()
+        rospy.spin()
+    except rospy.ROSInterruptException:
+        print("Shutting down")
