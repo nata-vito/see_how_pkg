@@ -5,7 +5,7 @@ from std_msgs.msg import String
 from subscriber import SubRight
 
 def commandListener():
-    listener = SubRight()
+    listener = SubRight(flag=1)             # To Start commands processing
     print(type(listener.getSide()))
     
     
