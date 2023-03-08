@@ -6,12 +6,13 @@ from subscriber import SubRight
 
 def commandListener():
     listener = SubRight(flag=1)             # To Start commands processing
-    print(type(listener.getSide()))
+    print(listener.getSide())
     
     
 if __name__ == "__main__":
     try:
         commandListener()
-        rospy.spin()
+        res = rospy.spin()
+        print("rospy.spin():", res)
     except rospy.ROSInterruptException:
         print("Shutting down")

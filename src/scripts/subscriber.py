@@ -70,27 +70,39 @@ class SubLeft:
 class SubRight:
     
     def __init__(self, flag = 0):
-        rospy.init_node('sub_right_hand', anonymous=True)
-        sub                     = rospy.Subscriber('/Right', Hand, self.right_callback)
-        self.side               = ''
+        self.side               = 'Olasdf '
         self.fingers            = ''
         self.command            = ''
         self.flag               = flag
+        
+        rospy.init_node('sub_right_hand', anonymous=True)
+        sub                     = rospy.Subscriber('/Right', Hand, self.right_callback)
+        
+        print("Side no fim do init:", self.side)
+        
         #print(flag)
               
     def right_callback(self, data):
+        #print('Call')
         self.side               = data.side
         self.fingers            = data.fingers
         self.command            = data.command
         
+        print("Side no callback:", self.side)
+        
+        return self.side
+        
+    """
         # To Start commands processing
         if self.flag == 1:
             if self.command == 'Start':
-                print('hehe')
+                sel
         #print(self.command)
-        
+       """ 
         
     def getSide(self):
+        print("GetSIde:", self.side)
+        
         return self.side
     
     def getFingers(self):
