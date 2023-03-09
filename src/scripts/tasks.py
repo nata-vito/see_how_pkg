@@ -1,40 +1,49 @@
+import numpy
 import cv2 as cv
 import mediapipe as mp
+from mediapipe.tasks import python
+from mediapipe.tasks.python import vision
 
-BaseOptions                 = mp.tasks.BaseOptions
-GestureRecognizer           = mp.tasks.vision.GestureRecognizer
-GestureRecognizerOptions    = mp.tasks.vision.GestureRecognizerOptions
-GestureRecognizerResult     = mp.tasks.vision.GestureRecognizerResult
-VisionRunningMode           = mp.tasks.vision.RunningMode
+BaseOptions = mp.tasks.BaseOptions
+GestureRecognizer = mp.tasks.vision.GestureRecognizer
+GestureRecognizerOptions = mp.tasks.vision.GestureRecognizerOptions
+GestureRecognizerResult = mp.tasks.vision.GestureRecognizerResult
+VisionRunningMode = mp.tasks.vision.RunningMode
 
-model_path  = 'train-scripts/exported_model_hagrid/gesture_recognizer.task'
-base_options =  BaseOptions(model_asset_path = model_path)
+
+model_path = '/home/rota2030/test_ws/src/see_how_pkg/src/scripts/train-scripts/exported_model_hagrid/gesture_recognizer.task'
+base_options = BaseOptions(model_asset_path = model_path)
 
 # Create a gesture recognizer instance with the live stream mode:
 def print_result(result: GestureRecognizerResult, output_image: mp.Image, timestamp_ms: int):
     print('gesture recognition result: {}'.format(result))
-
+    
 options = GestureRecognizerOptions(
-          base_options=BaseOptions(model_asset_path = model_path),
-          running_mode=VisionRunningMode.LIVE_STREAM,
-          result_callback=print_result
-        )
+    base_options    = BaseOptions(model_asset_path = model_path),
+    running_mode    = VisionRunningMode.LIVE_STREAM,
+    result_callback = print_result)
 
-cap = cv.VideoCapture(0)
-fps = cap.get(cv.CAP_PROP_FPS)
-
-while cap.isOpened():
-    success, image = cap.read()
+with GestureRecognizer.create_from_options(options) as recognizer:
+    cap = cv.VideoCapture(0)
+  
+    while(True):
+        
+        # Capture the video frame
+        # by frame
+        ret, frame = cap.read()
     
-    while not success:
-        success, image = cap.read()
+        # Display the resulting frame
+        #cv.imshow('frame', frame)
+        frame_1 = frame.astype(numpy.uint8)
+        #print(type(frame_1))
+        mp_image = mp.Image(format= 'SRGB', data=frame_1)
+        # the 'q' button is set as the
+        # quitting button you may use any
+        # desired button of your choice
+        if cv.waitKey(1) & 0xFF == ord('q'):
+            break
     
-    image.flags.writeable = False
-    image = cv.cvtColor(image, cv.COLOR_BGR2RGB)
-    
-    # Convert the frame received from OpenCV to a MediaPipe’s Image object.
-    #mp_image = mp.Image(format = mp.ImageFormat.SRGB, data = image)
-    with GestureRecognizer.create_from_options(options) as recognizer:
-        recognizer.recognizer_async(image, fps)
-    #print(fps)
-    #recognizer.recognize_async(mp_image, fps)
+    # After the loop release the cap object
+    cap.release()
+    # Destroy all the windows
+    cv.destroyAllWindows()
