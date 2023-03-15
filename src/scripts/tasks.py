@@ -1,3 +1,4 @@
+import copy
 import numpy
 import cv2 as cv
 import mediapipe as mp
@@ -33,14 +34,26 @@ with GestureRecognizer.create_from_options(options) as recognizer:
         # Capture the video frame
         # by frame
         ret, frame = cap.read()
-    
+        
+        if not ret:
+            break
+        
+        frame = cv.flip(frame, 1)
+        debug_image = copy.deepcopy(frame)
+        
+        frame = cv.cvtColor(frame, cv.COLOR_BGR2RGB)
+        frame.flags.writeable = False
+        #frame.flags.writeable = False
         # Display the resulting frame
         #cv.imshow('frame', frame)
         frame_1 = frame
         #print(timestamp_ms)
         
-        mp_image = mp.packet_creator.create_image_frame(image_format = mp.ImageFormat.SRGB, data = frame_1)
-        print(mp_image)
+        mp_image = mp.packet_creator.create_image_frame(image_format = mp.ImageFormat.SRGB, data = frame)
+        
+        if mp_image.: 
+            print( '')
+        #gesture = recognizer.process(mp_image)
         # the 'q' button is set as the
         # quitting button you may use any
         # desired button of your choice
