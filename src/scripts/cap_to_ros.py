@@ -47,19 +47,7 @@ def talker():
             if rospy.is_shutdown():
                 cap.release()         
              
-            """ sock.clientResponse()   
-                     
-            if sock.frame.all():    
-                msg = bridge.cv2_to_imgmsg(sock.frame, "bgr8")
-                pub.publish(msg)
-        
-            if cv2.waitKey(1) & 0xFF == ord('q'):
-                sock.client_socket.close()
-                break
             
-            if rospy.is_shutdown():
-                sock.client_socket.close()
-                 """
 if __name__ == "__main__":
     try:
         talker()
