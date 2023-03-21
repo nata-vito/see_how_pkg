@@ -1,1 +1,0 @@
-{"id":"a06a3740-1c3d-478d-a8da-b056592b318b","space":51746,"runtime":"python3.9","name":"fastapi-app","path":"0phfqk","project":"e0vsgpdb","account":"144798365827","region":"sa-east-1","deps":["fastapi"],"envs":null,"public":true,"log_level":"debug","cron":""}
