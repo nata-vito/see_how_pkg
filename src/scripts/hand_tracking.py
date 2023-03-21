@@ -78,7 +78,32 @@ class handDetector():
         self.handsLabel(self.lmList, self.ids)
             
         return self.lmList
-
+    
+    def bounding_box(self, img, handNo=0, draw=True):
+        h, w, c = img.shape
+        if self.results.multi_hand_landmarks:
+            #myHand = self.results.multi_hand_landmarks[handNo]
+            myHand = self.results.multi_hand_landmarks
+            for handLMs in myHand:
+                x_max = 0
+                y_max = 0
+                x_min = w
+                y_min = h
+                for lm in handLMs.landmark:
+                    x, y = int(lm.x * w), int(lm.y * h)
+                    if x > x_max:
+                        x_max = x
+                    if x < x_min:
+                        x_min = x
+                    if y > y_max:
+                        y_max = y
+                    if y < y_min:
+                        y_min = y
+            coordinates = x_min, y_min, x_max, y_max
+        # if draw: cv.rectangle(img, (x_min, y_min), (x_max, y_max), (0, 255, 0), 2)
+            print(coordinates)
+            return coordinates
+    
     # Getting the level output
     def levelOutput(self, frame):
 

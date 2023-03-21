@@ -30,12 +30,16 @@ class ImgCon:
         
         if self.label == 'left_hand':
             self.hand.Left(self.img)
+            #self.hand.bounding_box
+            
         elif self.label == 'right_hand':
             self.hand.Right(self.img)
+            #self.hand.bounding_box
         
         
         if self.flag == 1:
             self.showImage()
+            #print(self.img)
    
     
     def showImage(self):

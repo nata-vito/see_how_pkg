@@ -1,6 +1,15 @@
 <launch>
+<!--<node pkg = "see_how_pkg" type = "main_socket_server.py" name = "socket_node" output = "screen" respawn = "true"></node>-->  
+    <arg name="tcp_ip" default="0.0.0.0"/>
+    <arg name="tcp_port" default="10000"/>
+
+    <node name="unity_endpoint" pkg="ros_tcp_endpoint" type="default_server_endpoint.py" output="screen">
+        <param name="tcp_ip" type="string" value="$(arg tcp_ip)"/>
+        <param name="tcp_port" type="int" value="$(arg tcp_port)"/>
+    </node>  
+    
     <node pkg = "see_how_pkg" type = "cap_to_ros.py" name = "camera_node" output = "screen" respawn = "true"></node> 
     <node pkg = "see_how_pkg" type = "left_hand.py" name = "left_hand_node" output = "screen" respawn = "true"></node>
     <node pkg = "see_how_pkg" type = "right_hand.py" name = "right_hand_node" output = "screen" respawn = "true"></node>
-    <node pkg = "see_how_pkg" type = "show_image.py" name = "image_node" output = "screen" respawn = "true"></node>
+<!--     <node pkg = "see_how_pkg" type = "show_image.py" name = "image_node" output = "screen" respawn = "true"></node>-->
 </launch>
