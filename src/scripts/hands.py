@@ -1,4 +1,5 @@
-#!/usr/local/bin/python3.9
+#!/venv/bin/python
+
 import rospy
 import cv2 as cv
 import numpy as np
