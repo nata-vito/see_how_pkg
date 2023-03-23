@@ -28,13 +28,14 @@ while True:
         A, B, C = coff
         distanceCM = A * distance ** 2 + B * distance + C
         
-        if distanceCM < 90:
-            mouse = Mouse(img)
-            mouse.main()
+        if distanceCM > 30 and distanceCM < 100:
+            #mouse = Mouse(img)
+            #mouse.main()
             print('Start', distanceCM)
         else:
             print('Stop')
         
+    else: print('Stop')
         
     cv2.imshow("Image", img)
     cv2.waitKey(1)
