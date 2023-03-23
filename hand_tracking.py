@@ -39,24 +39,64 @@ class handDetector():
         self.tipIds = [4, 8, 12, 16, 20]
         
     # To find hands in video
-    def findHands(self, img, op = "", draw=True):
-        
-        imgRGB              = cv.cvtColor(img, cv.COLOR_BGR2RGB)
-        self.results        = self.hands.process(imgRGB)
-        self.op             = op
+    def findHands(self, img, draw=True, flipType=True):
+        """
+        Finds hands in a BGR image.
+        :param img: Image to find the hands in.
+        :param draw: Flag to draw the output on the image.
+        :return: Image with or without drawings
+        """
+        imgRGB = cv.cvtColor(img, cv.COLOR_BGR2RGB)
+        self.results = self.hands.process(imgRGB)
+        allHands = []
+        h, w, c = img.shape
+        if self.results.multi_hand_landmarks:
+            for handType, handLms in zip(self.results.multi_handedness, self.results.multi_hand_landmarks):
+                myHand = {}
+                ## lmList
+                mylmList = []
+                xList = []
+                yList = []
+                for id, lm in enumerate(handLms.landmark):
+                    px, py, pz = int(lm.x * w), int(lm.y * h), int(lm.z * w)
+                    mylmList.append([px, py, pz])
+                    xList.append(px)
+                    yList.append(py)
 
-        self.findPosition(img)
-        
-        if self.side == self.op:
-            
-            if self.results.multi_hand_landmarks:
-                
-                for handLms in self.results.multi_hand_landmarks:
-                    
-                    #Drawing Landmarks
-                    if draw: self.mpDraw.draw_landmarks(img, handLms, self.mpHands.HAND_CONNECTIONS)
+                ## bbox
+                xmin, xmax = min(xList), max(xList)
+                ymin, ymax = min(yList), max(yList)
+                boxW, boxH = xmax - xmin, ymax - ymin
+                bbox = xmin, ymin, boxW, boxH
+                cx, cy = bbox[0] + (bbox[2] // 2), \
+                         bbox[1] + (bbox[3] // 2)
 
-            return img
+                myHand["lmList"] = mylmList
+                myHand["bbox"] = bbox
+                myHand["center"] = (cx, cy)
+
+                if flipType:
+                    if handType.classification[0].label == "Right":
+                        myHand["type"] = "Left"
+                    else:
+                        myHand["type"] = "Right"
+                else:
+                    myHand["type"] = handType.classification[0].label
+                allHands.append(myHand)
+
+                ## draw
+                if draw:
+                    self.mpDraw.draw_landmarks(img, handLms,
+                                               self.mpHands.HAND_CONNECTIONS)
+                    cv.rectangle(img, (bbox[0] - 20, bbox[1] - 20),
+                                  (bbox[0] + bbox[2] + 20, bbox[1] + bbox[3] + 20),
+                                  (255, 0, 255), 2)
+                    cv.putText(img, myHand["type"], (bbox[0] - 30, bbox[1] - 30), cv.FONT_HERSHEY_PLAIN,
+                                2, (255, 0, 255), 2)
+        if draw:
+            return allHands, img
+        else:
+            return allHands
 
     def findHandstoMouse(self, img, draw=True):
         
@@ -269,6 +309,6 @@ def main():
         cv.imshow("Image", img)
         cv.waitKey(1)
 
-
+""" 
 if __name__ == "__main__":
-    main()
+    main() """

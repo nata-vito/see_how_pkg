@@ -7,7 +7,7 @@ import autopy, pyautogui
 
 class Mouse:
     
-    def __init__(self):
+    def __init__(self, cam):
         
         self.wCam, self.hCam      = 640, 480
         self.frameR               = 100            # Frame Reduction
@@ -20,7 +20,6 @@ class Mouse:
         self.controll_mode        = ''
         self.fingers              = ''
 
-        self.cap                  = cv2.VideoCapture(0)
         self.detector             = htm.handDetector(maxHands=1)
         self.wScr, self.hScr      = autopy.screen.size()
         self.lmList, self.bbox    = '', ''
@@ -29,11 +28,8 @@ class Mouse:
         self.fingers              = ''
         self.controll_mode        = ''
         self.active               = ''
-        self.img                  = ''
+        self.img                  = cam
 
-        self.cap.set(3, self.wCam)
-        self.cap.set(4, self.hCam)
-        
         pyautogui.FAILSAFE = False
 
     def findHandLm(self):
@@ -113,28 +109,27 @@ class Mouse:
                  
     def main(self):
         
-        while True:
         
-            # 1. Find hand Landmarks
-            success, self.img       = self.cap.read()
-            self.img                = self.detector.findHandstoMouse(self.img)
-            self.lmList, self.bbox  = self.detector.findPosition(self.img)
-            
-            self.findHandLm()
-            self.decisionTaking()
-            self.actingControlMode()
+        
+        # 1. Find hand Landmarks
+        self.img                = self.detector.findHandstoMouse(self.img)
+        self.lmList, self.bbox  = self.detector.findPosition(self.img)
+        
+        self.findHandLm()
+        self.decisionTaking()
+        self.actingControlMode()
 
-            print(self.controll_mode, self.active)
-            
-            # 11. Frame Rate
-            cTime = time.time()
-            fps = 1 / (cTime - self.pTime)
-            self.pTime = cTime
-            cv2.putText(self.img, str(int(fps)), (20, 50), cv2.FONT_HERSHEY_PLAIN, 3, (255, 0, 0), 3)
-            
-            # 12. Display
-            cv2.imshow("Image", self.img)
-            cv2.waitKey(1)
+        print(self.controll_mode, self.active)
+        
+        # 11. Frame Rate
+        cTime = time.time()
+        fps = 1 / (cTime - self.pTime)
+        self.pTime = cTime
+        cv2.putText(self.img, str(int(fps)), (20, 50), cv2.FONT_HERSHEY_PLAIN, 3, (255, 0, 0), 3)
+        
+        # 12. Display
+        cv2.imshow("Image", self.img)
+        cv2.waitKey(1)
             
                      
            
