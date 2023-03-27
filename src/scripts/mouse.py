@@ -28,6 +28,7 @@ class Mouse:
         self.y1, self.y2          = '', ''
         self.fingers              = ''
         self.controll_mode        = ''
+        self.controll_mode_aux    = ''
         self.active               = ''
         self.img                  = ''
 
@@ -56,9 +57,10 @@ class Mouse:
             self.controll_mode   = 'Scroll'
             self.active          = 1
         
-        elif (self.fingers == [1, 1, 1, 1, 1]) & (self.active == 0):
+        elif (self.fingers == [1, 1, 1, 1, 1]) & (self.active == 0) or (self.controll_mode_aux == 'Cursor'):
             self.controll_mode   = 'Cursor'
             self.active          = 1    
+            self.controll_mode_aux = ''
     
     def actingControlMode(self):
         
@@ -87,9 +89,14 @@ class Mouse:
                 # 9. Find distance between fingers
                 length, img, lineInfo = self.detector.findDistance(8, 12, self.img)
                 print(length)
-
+                
+                # To avoid errors if the hand is not found in the image
+                if length == 0:
+                    self.controll_mode_aux = self.controll_mode
+                    return 0
+                
                 # 10. Click mouse if distance short
-                if length < 30:
+                if length > 0 and length < 30:
                     cv2.circle(img, (lineInfo[4], lineInfo[5]), 15, (0, 255, 0), cv2.FILLED)
                     autopy.mouse.click()
                     
