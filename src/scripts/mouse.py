@@ -129,16 +129,18 @@ class Mouse:
                     mode = 'N'
                     
     #                         
-    def main(self):
+    def main(self, img, flag):
         
+        #print(self.ros)
         # 1. Find hand Landmarks
-        if self.ros == False:
+        if flag == False:
             success, self.img       = self.cap.read()
             self.img                = self.detector.findHandstoMouse(self.img)
             self.lmList, self.bbox  = self.detector.findMousePosition(self.img)
         else:
-            self.img                = self.detector.findHandstoMouse(self.cap)
-            self.lmList, self.bbox  = self.detector.findMousePosition(self.img)
+            img = cv2.resize(img, (self.wCam, self.hCam), interpolation = cv2.INTER_AREA)
+            self.img                = self.detector.findHandstoMouse(img)
+            self.lmList, self.bbox  = self.detector.findMousePosition(img)
         
         self.findHandLm()
         self.decisionTaking()
@@ -157,3 +159,8 @@ class Mouse:
         cv2.waitKey(1)
             
 #                              
+if __name__ == '__main__':
+    mouse = Mouse(0)
+    mouse.main()
+else:
+    pass

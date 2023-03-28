@@ -10,15 +10,19 @@ from sensor_msgs.msg import Image
 class ImgCon:
     def __init__(self, obj = None, label = None, data = None, flag = 0):
         
-        if obj and label != None:
+        if obj and (label == 'right_hand' or label == 'left_hand'):
             rospy.init_node(label, anonymous=True)
             self.hand           = obj.Hand()
-            self.label          = label
+            
+        elif obj and label == 'Mouse':
+            rospy.init_node(label, anonymous=True) 
+            self.mouse          =  obj.Mouse()
             
         else:
             rospy.init_node('image', anonymous=True)
             self.hand           = None
-            self.label          = label
+
+        self.label              = label
             
         # Topic to read the image msg data
         self.image_sub          = rospy.Subscriber("camera", Image, self.image_callback)
@@ -34,9 +38,7 @@ class ImgCon:
         #print(self.label)
         
         if self.label == 'Mouse':
-            mouse = Mouse(ros = True, cam = self.img)
-            mouse.main()
-            print('Olha o rato aq')
+            self.mouse.main(self.img, True)
         
         if self.label == 'left_hand':
             self.hand.Left(self.img)
