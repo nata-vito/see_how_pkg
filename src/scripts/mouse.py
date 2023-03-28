@@ -7,20 +7,31 @@ import autopy, pyautogui
 
 class Mouse:
     
-    def __init__(self):
+    #
+    def __init__(self, ros = False, cam = 0):
         
         self.wCam, self.hCam      = 640, 480
         self.frameR               = 100            # Frame Reduction
         self.smoothening          = 7
-
+        self.ros                  = ros
         self.pTime                = 0
         self.plocX, self.plocY    = 0, 0 # prev location mouse
         self.clocX, self.clocY    = 0, 0 # current location mouse
         self.active               = 0
         self.controll_mode        = ''
         self.fingers              = ''
+        self.img                  = ''
 
-        self.cap                  = cv2.VideoCapture(0)
+        if self.ros:
+            self.cap              = cam
+            self.cap              = cv2.resize(self.cap, (self.wCam, self.hCam), interpolation = cv2.INTER_AREA)
+    
+        else:
+            self.cap              = cv2.VideoCapture(cam)
+            self.cap.set(3, self.wCam)
+            self.cap.set(4, self.hCam)
+        
+        
         self.detector             = htm.handDetector(maxHands=1)
         self.wScr, self.hScr      = autopy.screen.size()
         self.lmList, self.bbox    = '', ''
@@ -30,13 +41,10 @@ class Mouse:
         self.controll_mode        = ''
         self.controll_mode_aux    = ''
         self.active               = ''
-        self.img                  = ''
-
-        self.cap.set(3, self.wCam)
-        self.cap.set(4, self.hCam)
         
         pyautogui.FAILSAFE = False
 
+    #
     def findHandLm(self):
         
         # 2. Get the tip of the index and middle fingers
@@ -49,8 +57,7 @@ class Mouse:
         
         return self.fingers
         
-        
-        
+    #  
     def decisionTaking(self):
                       
         if (self.fingers == [1, 1, 1, 1, 1]) and (self.active == 0) or (self.controll_mode_aux == 'Cursor'):
@@ -66,7 +73,7 @@ class Mouse:
             self.controll_mode   = 'N'
             self.active          = 0
             
-    
+    #
     def actingControlMode(self):
         
         if self.controll_mode == 'Cursor' :
@@ -121,37 +128,32 @@ class Mouse:
                     active = 0
                     mode = 'N'
                     
-                    
-                 
+    #                         
     def main(self):
         
-        while True:
-        
-            # 1. Find hand Landmarks
+        # 1. Find hand Landmarks
+        if self.ros == False:
             success, self.img       = self.cap.read()
             self.img                = self.detector.findHandstoMouse(self.img)
             self.lmList, self.bbox  = self.detector.findMousePosition(self.img)
-            
-            self.findHandLm()
-            self.decisionTaking()
-            self.actingControlMode()
+        else:
+            self.img                = self.detector.findHandstoMouse(self.cap)
+            self.lmList, self.bbox  = self.detector.findMousePosition(self.img)
+        
+        self.findHandLm()
+        self.decisionTaking()
+        self.actingControlMode()
 
-            print(self.controll_mode, self.active)
+        print(self.controll_mode, self.active)
+        
+        # 11. Frame Rate
+        cTime = time.time()
+        fps = 1 / (cTime - self.pTime)
+        self.pTime = cTime
+        cv2.putText(self.img, str(int(fps)), (20, 50), cv2.FONT_HERSHEY_PLAIN, 3, (255, 0, 0), 3)
+        
+        # 12. Display
+        cv2.imshow("Image", self.img)
+        cv2.waitKey(1)
             
-            # 11. Frame Rate
-            cTime = time.time()
-            fps = 1 / (cTime - self.pTime)
-            self.pTime = cTime
-            cv2.putText(self.img, str(int(fps)), (20, 50), cv2.FONT_HERSHEY_PLAIN, 3, (255, 0, 0), 3)
-            
-            # 12. Display
-            cv2.imshow("Image", self.img)
-            cv2.waitKey(1)
-            
-                     
-           
-if __name__ == '__main__':
-    mouse = Mouse()
-    mouse.main()
-else:
-    pass
+#                              
