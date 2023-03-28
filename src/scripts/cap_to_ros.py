@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python2.7
 
 import cv2
 import rospy
@@ -10,7 +10,7 @@ from cv_bridge import CvBridge, CvBridgeError
 
 # CvBridge to work with ROS
 bridge  = CvBridge()
-cam_uri = 'http://172.17.52.190:8090/?action=stream'
+cam_uri = 0
 
 # Video capture -> webcam
 cap     = cv2.VideoCapture(0)
