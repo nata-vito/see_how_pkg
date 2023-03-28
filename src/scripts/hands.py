@@ -99,6 +99,8 @@ class Hand:
                 command = '9'
             elif self.tracking.handFingers   == '11111':
                 command = '10'
+            elif self.tracking.handFingers   == '00001':
+                command = 'Exit'
                
             # Pub Here
             pub = Pub.Publisher(self.tracking.handFingers, self.tracking.side, self.tracking.countFingers, self.tracking.op, 
