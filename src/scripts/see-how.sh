@@ -16,6 +16,7 @@ Help()
 }
 
 if [ "$1" = "-s" ]; then
+    cd /root/ws/ && catkin_make
     source ~root/ws/devel/setup.bash 
     roslaunch see_how_pkg see_how.launch
 elif [ "$1" = "-l" ]; then

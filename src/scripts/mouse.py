@@ -47,20 +47,24 @@ class Mouse:
             # 3. Check which fingers are up
             self.fingers = self.detector.fingersUp()
         
-    def decisionTaking(self):
+        else: 
+            self.fingers = 0
         
+    def decisionTaking(self):
+                      
+        if (self.fingers == [1, 1, 1, 1, 1]) and (self.active == 0) or (self.controll_mode_aux == 'Cursor'):
+            self.controll_mode   = 'Cursor'
+            self.active          = 1    
+            self.controll_mode_aux = ''
+        
+        if (self.fingers == [0, 1, 0, 0, 0] or self.fingers == [0, 1, 1, 0, 0]) and (self.active == 0):
+            self.controll_mode   = 'Scroll'
+            self.active          = 1
+
         if (self.fingers == [0, 0, 0, 0, 0]):
             self.controll_mode   = 'N'
             self.active          = 0
             
-        elif (self.fingers == [0, 1, 0, 0, 0] or self.fingers == [0, 1, 1, 0, 0]) & (self.active == 0):
-            self.controll_mode   = 'Scroll'
-            self.active          = 1
-        
-        elif (self.fingers == [1, 1, 1, 1, 1]) & (self.active == 0) or (self.controll_mode_aux == 'Cursor'):
-            self.controll_mode   = 'Cursor'
-            self.active          = 1    
-            self.controll_mode_aux = ''
     
     def actingControlMode(self):
         
