@@ -13,7 +13,7 @@
 </center>
 
 
-<img src="img/show-img-processed.png" alt="Image processed and ROS topic being published">
+<img src="img/mouse-integratio-rospkg.gif" alt="Image processed and ROS topic being published">
 
 > Project developed with the objective of integrating technologies such as computer vision to the ROS, aiming for ease of adaptation. 
 
