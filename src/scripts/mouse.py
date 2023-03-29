@@ -56,11 +56,25 @@ class Mouse:
             self.fingers = self.detector.fingersUp()
         
         return self.fingers
+    
+    def isCursor(self):
+        
+        if (self.fingers == [1, 1, 1, 1, 1]) and (self.active == 0):
+            return True
+        
+        return False
+    
+    def isScroll(self):
+        
+        if (self.fingers == [0, 1, 0, 0, 0] or self.fingers == [0, 1, 1, 0, 0]) and (self.active == 0):
+            return True
+        
+        return False
         
     #  
     def decisionTaking(self):
                       
-        if (self.fingers == [1, 1, 1, 1, 1]) and (self.active == 0) or (self.controll_mode_aux == 'Cursor'):
+        if (self.fingers == [1, 1, 1, 1, 1]) and (self.active == 0):
             self.controll_mode   = 'Cursor'
             self.active          = 1    
             self.controll_mode_aux = ''
@@ -72,7 +86,8 @@ class Mouse:
         if (self.fingers == [0, 0, 0, 0, 0]):
             self.controll_mode   = 'N'
             self.active          = 0
-            
+        
+        
     #
     def actingControlMode(self):
         
