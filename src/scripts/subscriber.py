@@ -35,7 +35,7 @@ class ImgCon:
     def image_callback(self, msg):
         
         self.img = ros_numpy.numpify(msg)
-        #print(self.label)
+        #print(type(self.img))
         
         if self.label == 'Mouse':
             self.mouse.main(self.img, True)
