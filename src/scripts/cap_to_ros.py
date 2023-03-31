@@ -10,7 +10,7 @@ from cv_bridge import CvBridge, CvBridgeError
 
 # CvBridge to work with ROS
 bridge  = CvBridge()
-cam_uri = 0
+cam_uri = 'http://172.17.57.155:8090/?action=stream'
 
 # Video capture -> webcam
 cap     = cv2.VideoCapture(cam_uri)

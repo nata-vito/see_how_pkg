@@ -79,7 +79,10 @@ class Hand:
                 self.command = 'Stop'
             elif self.tracking.handFingers   == '10001':
                 self.command = 'Start'
-            
+            elif self.tracking.handFingers   == '10000':
+                self.command = 'Exit'
+            elif self.tracking.handFingers   == '01000':
+                self.command = '1'
                
             # Pub Here
             pub = Pub.Publisher(self.tracking.handFingers, self.tracking.side, self.tracking.countFingers, self.tracking.op, 
